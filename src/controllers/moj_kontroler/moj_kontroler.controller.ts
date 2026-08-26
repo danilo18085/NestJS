@@ -1,5 +1,5 @@
 import { Controller, Get, Inject, Param, ParseIntPipe } from '@nestjs/common';
-import { Pesma } from 'src/entity/Pesma';
+import { Pesma } from 'src/Entity/Pesma';
 import { MojServisService } from 'src/services/moj_servis/moj_servis.service';
 
 @Controller('pesme')
