@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MojServisService } from './services/moj_servis/moj_servis.service';
-import { MojKontrolerController } from './controllers/moj_kontroler/moj_kontroler.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Pesma } from './Entity/Pesma';
 import { Igrica } from './Entity/Igrica';
 import { IgricaService } from './services/igrica/igrica.service';
-import { IgricaController } from './controllers/igrica/igrica.controller';
+import { IgricaController } from './Controllers/igrica/igrica.controller';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -24,14 +21,14 @@ import { IgricaController } from './controllers/igrica/igrica.controller';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [Pesma, Igrica],
+        entities: [Igrica],
         synchronize: true,
       })
     }),
-    TypeOrmModule.forFeature([Pesma, Igrica]),
+    TypeOrmModule.forFeature([Igrica]),
   ],
 
-  controllers: [AppController, MojKontrolerController, IgricaController],
-  providers: [AppService, MojServisService, IgricaService],
+  controllers: [AppController, IgricaController],
+  providers: [AppService, IgricaService],
 })
 export class AppModule {}

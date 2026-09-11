@@ -13,7 +13,7 @@ export class IgricaController {
         return this.igrica_service.vrati_sve_igre()
     }
 
-    @Get("segment123")
+    @Get("igrice_filter")
     public vrati_igre_sa_filterom(@Query() filter : Filter)
     {
         return this.igrica_service.vrati_igre_sa_filterom(filter)
