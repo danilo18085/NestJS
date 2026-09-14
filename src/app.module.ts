@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Igrica } from './Entity/Igrica';
 import { IgricaService } from './services/igrica/igrica.service';
 import { IgricaController } from './Controllers/igrica/igrica.controller';
+import { Admin } from './Entity/Admin';
+import { Tiket } from './Entity/Tiket';
+import { Token } from './Entity/Token';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -21,11 +24,11 @@ import { IgricaController } from './Controllers/igrica/igrica.controller';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [Igrica],
+        entities: [Igrica, Admin, Tiket, Token],
         synchronize: true,
       })
     }),
-    TypeOrmModule.forFeature([Igrica]),
+    TypeOrmModule.forFeature([Igrica, Admin, Tiket, Token]),
   ],
 
   controllers: [AppController, IgricaController],
