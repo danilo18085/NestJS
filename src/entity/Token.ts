@@ -8,7 +8,7 @@ export class Token
     id!: number
 
     @Column()
-    id_admina!: number
+    username_admina!: string
 
     @Column()
     vrednost_tokena!: string

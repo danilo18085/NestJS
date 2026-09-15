@@ -11,6 +11,8 @@ import { Tiket } from './Entity/Tiket';
 import { Token } from './Entity/Token';
 import { TiketController } from './Controllers/tiket/tiket.controller';
 import { TiketService } from './services/tiket/tiket.service';
+import { TokenService } from './services/token/token.service';
+import { TokenController } from './Controllers/token/token.controller';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -33,7 +35,7 @@ import { TiketService } from './services/tiket/tiket.service';
     TypeOrmModule.forFeature([Igrica, Admin, Tiket, Token]),
   ],
 
-  controllers: [AppController, IgricaController, TiketController],
-  providers: [AppService, IgricaService, TiketService],
+  controllers: [AppController, IgricaController, TiketController, TokenController],
+  providers: [AppService, IgricaService, TiketService, TokenService],
 })
 export class AppModule {}
