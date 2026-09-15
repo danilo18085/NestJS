@@ -18,9 +18,9 @@ export class IgricaService {
     {
         const query = this.igra_repository.createQueryBuilder('igrica');
 
-         const zanrNiz = typeof filter.zanr === 'string' 
-            ? (filter.zanr as string).split(',').filter(z => z.length > 0)
-            : filter.zanr
+        const zanrNiz = typeof filter.zanr === 'string' 
+          ? (filter.zanr as string).split(',').filter(z => z.length > 0)
+          : filter.zanr
 
         if (filter.zanr.length !== 0) 
         {
