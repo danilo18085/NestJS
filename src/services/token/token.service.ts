@@ -57,11 +57,34 @@ export class TokenService
             where: { username_admina }
         })
 
-        console.log(token)
         if (token === null)
             return
         else
             this.token_repository.remove(token)
+    }
+
+    async validuj_token(username_admina : string, token : string) : Promise<boolean>
+    {
+        const token_vracen : (TokenModel | null) = await this.token_repository.findOne(
+            {
+                where: {username_admina}
+            }
+        )
+
+        if(token_vracen === null)
+        {console.log("false jer nije vracen token iz baze"); return false}
+            //return false
+
+        if(token_vracen.vrednost_tokena !== token)
+        {console.log("vracen jer se vrednost tokena ne poklapa"); return false}
+            //return false
+
+        const sadasnje_vreme = new Date()
+        if(token_vracen.vreme_isteka <= sadasnje_vreme)
+        {console.log("false jer vreme"); return false}
+            //return false
+
+        return true
     }
 
 }

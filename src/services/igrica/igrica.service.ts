@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Igrica } from 'src/Entity/Igrica';
 import { Filter } from 'src/Interfaces/Filter';
+import { IgricaModel } from 'src/Interfaces/IgricaModel';
 import { Repository } from 'typeorm';
+import { TokenService } from '../token/token.service';
 
 @Injectable()
 export class IgricaService {
 
-    constructor(@InjectRepository(Igrica) private igra_repository : Repository<Igrica>) {}
+    constructor(@InjectRepository(Igrica) private igra_repository : Repository<Igrica>,
+                                          private token_service : TokenService) {}
 
     public vrati_sve_igre()
     {
@@ -44,4 +47,17 @@ export class IgricaService {
     
         return query.getMany();
     }
+
+    public async dodaj_igricu(igrica : IgricaModel, username : string, token : string)
+    {
+      if(await this.token_service.validuj_token(username, token))
+      {
+        const query = this.igra_repository.create(igrica)
+        return this.igra_repository.save(query)
+      }
+      else
+        return null
+    }
+
+
 }
