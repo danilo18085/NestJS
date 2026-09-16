@@ -29,4 +29,21 @@ export class TiketService
             return null
     }
 
+    async izbrisi_tiket(id : number, username : string, token : string)
+    {
+      if(await this.token_service.validuj_token(username, token))
+      {
+        const tiket = await this.tiket_repository.findOne({
+            where: { id }
+        })
+
+        if(tiket === null)
+          return null
+
+        return this.tiket_repository.remove(tiket)
+      }
+      else
+        return null
+    }
+
 }

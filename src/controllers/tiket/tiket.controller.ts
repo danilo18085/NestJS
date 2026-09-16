@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Tiket } from 'src/Entity/Tiket';
 import { TiketService } from 'src/services/tiket/tiket.service';
 
@@ -19,5 +19,11 @@ export class TiketController
     vrati_tikete(@Param("username") username : string, @Param("token") token : string)
     {
         return this.tiket_service.vrati_tikete(username, token)
+    }
+
+    @Delete("izbrisi_tiket/:id/:username/:token")
+    public izbrisi_igricu(@Param("id") id : string, @Param("username") username : string, @Param("token") token : string )
+    {
+        this.tiket_service.izbrisi_tiket(Number(id), username, token)
     }
 }
