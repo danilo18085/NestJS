@@ -59,5 +59,22 @@ export class IgricaService {
         return null
     }
 
+    public async izbrisi_igricu(id : number, username : string, token : string)
+    {
+      if(await this.token_service.validuj_token(username, token))
+      {
+        const token = await this.igra_repository.findOne({
+            where: { id }
+        })
+
+        if(token === null)
+          return null
+
+        return this.igra_repository.remove(token)
+      }
+      else
+        return null
+    }
+
 
 }

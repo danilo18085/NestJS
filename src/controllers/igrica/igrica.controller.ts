@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import type { Filter } from 'src/Interfaces/Filter';
 import type { IgricaModel } from 'src/Interfaces/IgricaModel';
 import { IgricaService } from 'src/services/igrica/igrica.service';
@@ -24,5 +24,11 @@ export class IgricaController {
     public dodaj_igricu(@Body() igra : IgricaModel, @Param("username") user : string, @Param("token") token : string)
     {
         return this.igrica_service.dodaj_igricu(igra, user, token)
+    }
+
+    @Delete("izbrisi_igricu/:id/:username/:token")
+    public izbrisi_igricu(@Param("id") id : string, @Param("username") username : string, @Param("token") token : string )
+    {
+        this.igrica_service.izbrisi_igricu(Number(id), username, token)
     }
 }
