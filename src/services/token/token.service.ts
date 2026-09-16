@@ -35,7 +35,7 @@ export class TokenService
             let enkriptovano = cipher.update(username + password + vreme.toLocaleString(), 'utf8', 'hex')
             enkriptovano += cipher.final('hex')
 
-            const zaPolaSata = new Date(vreme.getTime() + 30 * 60 * 1000)
+            const zaPolaSata = new Date(vreme.getTime() + 120 * 60 * 1000)
 
             const novi_token : TokenModel = 
             {
